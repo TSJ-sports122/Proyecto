@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";  
 $password = "";     
-$basedatos = "tsj sports";
+$basedatos = "tsj_sports";
 
 $conexion = new mysqli($servidor, $usuario, $password, $basedatos);
 

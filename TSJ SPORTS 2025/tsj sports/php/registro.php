@@ -2,21 +2,30 @@
 $conexion = new mysqli("localhost", "root", "", "tsj_sports");
 
 if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
+    header("Location: ../dashboard.html");
+} else {
+    // ✅ Si la conexión fue exitosa, redirige al dashboard
+    header("Location: ../dashboard.html");
+    exit();
 }
 
-$nombre = $_POST['nombre'] ?? '';
-$correo = $_POST['email'] ?? '';
-$clave = password_hash($_POST['password'] ?? '', PASSWORD_DEFAULT);
+// Recibir datos del formulario
+$usuario = $_POST['nombre'] ?? '';   // en tu formulario usas name="nombre"
+$email   = $_POST['email'] ?? '';
+$clave   = password_hash($_POST['password'] ?? '', PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO usuarios (nombre, correo, contraseña) VALUES ('$nombre', '$correo', '$clave')";
+// Usar sentencia preparada para evitar inyección SQL
+$stmt = $conexion->prepare("INSERT INTO usuarios (usuario, email, contrasena) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $usuario, $email, $clave);
 
-if ($conexion->query($sql) === TRUE) {
-    header("Location: ../Animated Login and Signup Form Leaf/tsj sports/index.html"); // Cambia esto a tu página final
+if ($stmt->execute()) {
+    // Redirige al login después de registrarse
+    header("Location: ../index.html");
     exit();
 } else {
-    echo "Error: " . $conexion->error;
+    echo "Error: " . $stmt->error;
 }
 
+$stmt->close();
 $conexion->close();
 ?>
