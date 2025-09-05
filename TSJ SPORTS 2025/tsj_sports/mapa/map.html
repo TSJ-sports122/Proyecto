@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAPA</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa - TSJ SPORTS</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- Nuestro CSS -->
+  <link rel="stylesheet" href="map.css">
 </head>
 <body>
-    <div id="mapa" style="height: 600px;"></div>  
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>  
-<script>  
-    const map = L.map('mapa').setView([19.4326, -99.1332], 13); // Coordenadas CDMX  
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);  
-</script>  
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Nuestro JS -->
+  <script src="map.js"></script>
 </body>
 </html>
